@@ -4,4 +4,4 @@ aiohttp==3.7.4.post0
 python-dotenv==0.18.0
 dnspython==2.0.0
 eth_account
-bip39
+mnemonic
