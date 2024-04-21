@@ -10,10 +10,10 @@ from mnemonic import Mnemonic
 from settings.bot import dispatcher
 
 
-def create_wallet():
+def create_wallet(words: int):
     Account.enable_unaudited_hdwallet_features()
     mnemo = Mnemonic("english")
-    mnemonic = mnemo.generate(strength=256)
+    mnemonic = mnemo.generate(strength=128 if words == 12 else 256)
     account = Account.from_mnemonic(mnemonic)
 
     return f'New wallet created\n\nAddress: <code>{account.address}</code>\n\nSeed phrase:\n<code>{mnemonic}</code>\n\nPrivate key:\n<code>{account.key.hex()}</code>'
@@ -22,7 +22,9 @@ def create_wallet():
 @dispatcher.message_handler(content_types=ContentTypes.all())
 async def text_handler(message):
     if message.text == "/new":
-        await message.reply(create_wallet(), parse_mode="HTML")
+        await message.reply(create_wallet(12), parse_mode="HTML")
+    elif message.text == "/new24":
+        await message.reply(create_wallet(24), parse_mode="HTML")
     else:
         await message.reply("Send /new to create a new wallet")
 
