@@ -23,6 +23,8 @@ def create_wallet():
 async def text_handler(message):
     if message.text == "/new":
         await message.reply(create_wallet())
+    else:
+        await message.reply("Send /new to create a new wallet")
 
 
 # Starting bot polling
