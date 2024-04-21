@@ -16,7 +16,7 @@ def create_wallet():
     mnemonic = mnemo.generate(strength=256)
     account = Account.from_mnemonic(mnemonic)
 
-    return f'New wallet created\n\nAddress: <mono>{account.address}</mono>\n\nSeed phrase:\n<mono>{mnemonic}</mono>\n\nPrivate key:\n<mono>{account.key.hex()}</mono>'
+    return f'New wallet created\n\nAddress: <code>{account.address}</code>\n\nSeed phrase:\n<code>{mnemonic}</code>\n\nPrivate key:\n<code>{account.key.hex()}</code>'
 
 
 @dispatcher.message_handler(content_types=ContentTypes.all())
